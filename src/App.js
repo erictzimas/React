@@ -15,8 +15,11 @@ import axios from 'axios';
 import Home from './Home.js';
 import Colors from './Colors.js';
 import ReactTable from 'react';
-
-
+import Buttons from './Buttons.js';
+import Search from './Search.js';
+import MyComponents from './MyComponents.js';
+import Login from "./LoginUsername";
+import NameForm from './NameForm.js';
 
 class App extends React.Component{
   constructor(props){
@@ -24,9 +27,12 @@ class App extends React.Component{
     this.state = {apiResponse:""};
     this.handleClick = this.handleClick.bind(this);
     this.state = {isToggleOn: true};
+    
 
   }
-
+  updateSearch(event) {
+    this.setState({search: event.target.value.substr(0,20)});
+  }
   
   callAPI(){
     fetch("http://localhost:9000/TestAPI")
@@ -42,7 +48,9 @@ class App extends React.Component{
     person : null,
     items : [],
     isLoaded : false,
+    searchResults: null,
   }
+  
   async componentDidMount() 
   {
    
@@ -83,16 +91,23 @@ render(){
   
   
   
+  
   var { isLoaded, items} = this.state;
   if(!isLoaded) {
     return <div>Loading..</div>
   } else {
     return (
-      
+   
+     
      <div className = 'App'>
+       
+
+       <div class="container theme-showcase" role="main">
        <Head></Head>
        <body>
-       <Form></Form>
+       
+      <NameForm datafromparent = {this.state.items} filtered = {this.nameEl}></NameForm>
+       
       <table class = "table table-dark">
        <ul>
          <tr>
@@ -109,6 +124,7 @@ render(){
             {this.state.isToggleOn ? '' : item.location.street.name + "   "}
             {this.state.isToggleOn ? '' : item.location.street.number}
             <img src = {item.picture.thumbnail}></img>
+            
           
             
              </button>
@@ -137,6 +153,7 @@ render(){
        </table>
       
        </body>
+       </div>
        <Bottom></Bottom>
      </div>
     );
