@@ -24,15 +24,24 @@
   color: white;
 }
 
+
 .App-link {
   color: #61dafb;
+}
+body {
+  background : #6c757d;
 }
 .form-control {
   display: inline-block;
   width: 500px;
   vertical-align: middle;
 }
-
+button, input, optgroup, select, textarea {
+  margin: 10px;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
